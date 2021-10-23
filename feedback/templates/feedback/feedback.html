@@ -9,7 +9,7 @@
                 <div class="col-md-5 col-sm-6">
                     <h3 class="widget-title">Форма обратной связи</h3>
                     <div class="contact-form">
-                        <form name="contactform" id="contactform" method="post">
+                        <form name="feedback" id="feedback" method="post">
                             <p>
                                 <input name="name" type="text" id="name" value="{{ name }}">
                             </p>
@@ -17,15 +17,15 @@
                                 <input name="last_name" type="text" id="last_name" value="{{ last_name }}">
                             </p>
                             <p>
-                                <textarea name="comment" id="comment">{{ body }}</textarea>
+                                <textarea name="body" id="body">{{ body }}</textarea>
                             </p>
                             <input type="submit" class="mainBtn" value="Отправить">
                         </form>
-                    </div> <!-- /.contact-form -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div> <!-- /.content-section -->
+    </div>
 
 </main>
 
