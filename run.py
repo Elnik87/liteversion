@@ -1,4 +1,4 @@
-from route import app
+from liteversion import app
 
 if __name__ == "__main__":
     app.run()

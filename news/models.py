@@ -1,16 +1,13 @@
 import re
 from datetime import datetime
-from route import db
+from liteversion import db
+from transliterate import translit
 
 
 def slugify(s):
     pattern = r'[^\w+]'
-    return re.sub(pattern, '-', s)
-
-
-def __init__(self, *args, **kwargs):
-    super(News, self).__init__(*args, **kwargs)
-    self.generate_slug()
+    a = translit(s, 'ru', reversed=True)
+    return re.sub(pattern, '-', a)
 
 
 class News(db.Model):

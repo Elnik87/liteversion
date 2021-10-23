@@ -1,5 +1,5 @@
 from datetime import datetime
-from route import db
+from liteversion import db
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
