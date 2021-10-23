@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+      <div class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-6">
+                    <h3 class="widget-title">Форма обратной связи</h3>
+                    <div class="contact-form">
+                        <form name="contactform" id="contactform" method="post">
+                            <p>
+                                <input name="name" type="text" id="name" value="{{ name }}">
+                            </p>
+                            <p>
+                                <input name="last_name" type="text" id="last_name" value="{{ last_name }}">
+                            </p>
+                            <p>
+                                <textarea name="comment" id="comment">{{ body }}</textarea>
+                            </p>
+                            <input type="submit" class="mainBtn" value="Отправить">
+                        </form>
+                    </div> <!-- /.contact-form -->
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.content-section -->
+
+</main>
+
+{% endblock %}

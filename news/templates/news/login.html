@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main>
+<div class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h3 class="widget-title" style="text-align: center" >Связаться с нами</h3>
+                <div class="contact-form">
+                    <form action="/login" name="login" id="login" method="post">
+                        <p>
+                            <input name="username" type="text" id="username" placeholder="Введите имя администратора новостей">
+                        </p>
+                        <p>
+                            <input name="password" type="text" id="password" placeholder="Введите пароль">
+                        </p>
+                        <input type="submit" class="mainBtn" value="Отправить">
+                    </form>
+                </div> <!-- /.contact-form -->
+            </div>
+        </div>
+    </div>
+</div> <!-- /.content-section -->
+
+</main>
+
+{% endblock %}
