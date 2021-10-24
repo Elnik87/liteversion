@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main>
+    <div class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <h3 class="widget-title" style="text-align: center">Обновление новости</h3>
+                    <div class="contact-form">
+                        <form action="/news/news_update_create" name="news_update_create" id="news_update_create"
+                              method="post">
+                            <p>
+                                <input name="title" type="text" id="title" value='{{ news.title }}'>
+                            </p>
+                            <p>
+                                <textarea name="content" id="content">{{ news.content }}</textarea>
+                            </p>
+                            <input type="submit" class="mainBtn" value="Обновить">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

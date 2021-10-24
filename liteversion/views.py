@@ -1,7 +1,9 @@
 from flask import render_template
+
 from liteversion import app
 from news.views import news
 from feedback.views import feedback
+from authorization.views import admin
 
 
 @app.route('/')
@@ -29,5 +31,6 @@ def beret():
     return render_template("beret.html", title="Краповый берет")
 
 
+app.register_blueprint(admin, url_prefix="/admin")
 app.register_blueprint(news, url_prefix="/news")
 app.register_blueprint(feedback, url_prefix="/feedback")

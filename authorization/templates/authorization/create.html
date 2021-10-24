@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main>
+    <div class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <h3 class="widget-title" style="text-align: center">Добавление новости</h3>
+                    <div class="contact-form">
+                        <form action="/news/create" name="create" id="create" method="post">
+                            <p>
+                                <input name="title" type="text" id="title" placeholder="Введите название новости">
+                            </p>
+                            <p>
+                                <textarea name="content" id="content"
+                                          placeholder="Введите содержание новости"></textarea>
+                            </p>
+                            <input type="submit" class="mainBtn" value="Добавить">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

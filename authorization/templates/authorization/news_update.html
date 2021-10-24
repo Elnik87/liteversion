@@ -4,11 +4,11 @@
 {% block content %}
 
 <main>
-<div>
-<h5>{{ news.title }}</h5>
-<h5>{{ news.content }}</h5>
-<h5>{{ news.date.date() }}</h5>
-</div>
+    <div>
+        <h5>{{ news.title }}</h5>
+        <h5>{{ news.content }}</h5>
+        <h5>{{ news.date.date() }}</h5>
+    </div>
     <a href="/news/{{ news.slug }}/news_delete" class="btn btn-warning">Удалить</a>
     <a href="/news/{{ news.slug }}/news_update_create" class="btn btn-warning">Редактировать</a>
 
