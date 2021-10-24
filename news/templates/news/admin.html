@@ -4,24 +4,25 @@
 {% block content %}
 
 <main>
+     <a href="/news/create" class="btn btn-warning">Добавить новость</a>
 {% if news|length > 0 %}
 <h1>Новости воинской части</h1>
 
 {% for new in news %}
 <div class="alert alert-info">
-<h5>{{ new.name }}</h5>
-<h5>{{ new.last_name }}</h5>
-<h5>{{ new.phone }}</h5>
-<h5>{{ new.comment }}</h5>
+<h5>{{ new.title }}</h5>
+<h5>{{ new.content }}</h5>
+<h5>{{ new.slug }}</h5>
 <h5>{{ new.date.date() }}</h5>
-<a href="/{{ slug }}/delete" class="btn btn-warning">Удалить</a>
-<a href="/{{ slug }}/create" class="btn btn-warning">Редактировать</a>
+
+<a href="/news/{{ new.slug }}/news_update" class="btn btn-warning">Редактировать</a>
 </div>
 
 
 {% endfor%}
 {% else %}
 <h2>Пока еще ни одну новость не добавили</h2>
+
 {% endif %}
 
 </main>

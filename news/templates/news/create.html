@@ -8,16 +8,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h3 class="widget-title" style="text-align: center" >Связаться с нами</h3>
+                <h3 class="widget-title" style="text-align: center" >Добавление новости</h3>
                 <div class="contact-form">
-                    <form action="/login" name="login" id="login" method="post">
+                    <form action="/news/create" name="create" id="create" method="post">
                         <p>
-                            <input name="username" type="text" id="username" placeholder="Введите имя администратора новостей">
+                            <input name="title" type="text" id="title" placeholder="Введите название новости">
                         </p>
                         <p>
-                            <input name="password" type="text" id="password" placeholder="Введите пароль">
+                            <textarea name="content" id="content" placeholder="Введите содержание новости"></textarea>
                         </p>
-                        <input type="submit" class="mainBtn" value="Отправить">
+                        <input type="submit" class="mainBtn" value="Добавить">
                     </form>
                 </div>
             </div>
