@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, url_for
 from flask_login import login_user, login_required, logout_user
-from werkzeug.security import check_password_hash
+from liteversion import bcrypt
 from werkzeug.utils import redirect
 
 from feedback.models import Feedback
@@ -16,16 +16,13 @@ def login():
     if request.method == 'POST':
         login = request.form.get('login')
         password = request.form.get('password')
-        if login == "Elnik" and password == "12345":
-            user = User.query.filter_by(login=login).first()
-            if check_password_hash(user.password, password):
+        user = User.query.filter_by(login=login).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, password):
                 login_user(user)
-                redirect("/admin")
+                return redirect(url_for("admin.admins"))
             else:
-                flash('Что-то неправильно ввел')
-        else:
-            flash('Что-то неправильно ввел')
-            return redirect("/")
+                return redirect(url_for("login"))
     else:
         return render_template("authorization/login.html")
 
@@ -36,11 +33,11 @@ def logout():
     logout_user()
     return redirect(url_for("/"))
 
-
-@admin.after_request
-def redirect_to_authorization(response):
-    if response.status_code == 401:
-        return redirect(url_for("login"))
+#
+# @admin.after_request
+# def redirect_to_authorization(response):
+#     if response.status_code == 401:
+#         return redirect(url_for("login"))
 
 
 @admin.route('/<slug>/news_update')
@@ -89,7 +86,7 @@ def create():
         try:
             db.session.add(news_simple)
             db.session.commit()
-            return redirect('')
+            return redirect('/')
         except:
             return "Ошибка"
     else:

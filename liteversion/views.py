@@ -1,5 +1,4 @@
 from flask import render_template
-
 from liteversion import app
 from news.views import news
 from feedback.views import feedback
