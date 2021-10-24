@@ -7,8 +7,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(30), nullable=False)
     password = db.Column(db.String(30), nullable=False)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
-
-

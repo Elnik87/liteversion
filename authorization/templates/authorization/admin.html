@@ -24,7 +24,24 @@
 <h2>Пока еще ни одну новость не добавили</h2>
 
 {% endif %}
+<br>
 
+     {% if feedback|length > 0 %}
+<h1>Кто что написал в обратной связи</h1>
+
+{% for feedback in feedbacks %}
+<div class="alert alert-info">
+<h5>{{ feedback.name }}</h5>
+<h5>{{ feedback.last_name }}</h5>
+<h5>{{ feedback.body }}</h5>
+<h5>{{ new.date.date() }}</h5>
+</div>
+
+{% endfor%}
+{% else %}
+<h2>Пока еще никто ничего не написал</h2>
+
+{% endif %}
 </main>
 
 {% endblock %}

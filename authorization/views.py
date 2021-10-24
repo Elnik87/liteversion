@@ -3,8 +3,9 @@ from flask_login import login_user, login_required, logout_user
 from werkzeug.security import check_password_hash
 from werkzeug.utils import redirect
 
-from liteversion import db
+from feedback.models import Feedback
 from news.models import News
+from liteversion import db
 from .models import User
 
 admin = Blueprint("admin", __name__, template_folder="templates")
@@ -99,4 +100,5 @@ def create():
 @login_required
 def admins():
     news = News.query.order_by(News.date.desc()).all()
-    return render_template("authorization/admin.html", news=news)
+    feedbacks = Feedback.query.order_by(Feedback.date.desc()).all()
+    return render_template("authorization/admin.html", news=news, feedbacks=feedbacks)
