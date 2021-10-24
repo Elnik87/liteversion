@@ -97,6 +97,6 @@ def create():
 
 @admin.route('/')
 @login_required
-def admin():
+def admins():
     news = News.query.order_by(News.date.desc()).all()
     return render_template("authorization/admin.html", news=news)
