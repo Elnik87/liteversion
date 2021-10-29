@@ -9,8 +9,8 @@
         <h5>{{ news.content }}</h5>
         <h5>{{ news.date.date() }}</h5>
     </div>
-    <a href="/news/{{ news.slug }}/news_delete" class="btn btn-warning">Удалить</a>
-    <a href="/news/{{ news.slug }}/news_update_create" class="btn btn-warning">Редактировать</a>
+    <a href="/admin/{{news.slug}}/news_delete" class="btn btn-warning">Удалить</a>
+    <a href="/admin/{{news.slug}}/news_update_create" class="btn btn-warning">Редактировать</a>
 
 
 </main>

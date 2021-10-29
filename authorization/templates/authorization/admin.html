@@ -4,7 +4,7 @@
 {% block content %}
 
 <main>
-     <a href="/news/create" class="btn btn-warning">Добавить новость</a>
+     <a href="{{ url_for('admin.create') }}" class="btn btn-warning">Добавить новость</a>
 {% if news|length > 0 %}
 <h1>Новости воинской части</h1>
 
@@ -15,7 +15,7 @@
 <h5>{{ new.slug }}</h5>
 <h5>{{ new.date.date() }}</h5>
 
-     <a href="/news/{{ new.slug }}/news_update" class="btn btn-warning">Редактировать</a>
+     <a href="/admin/{{new.slug}}/news_update" class="btn btn-warning">Редактировать</a>
 </div>
 
 

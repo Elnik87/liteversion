@@ -39,6 +39,30 @@ def logout():
 #     if response.status_code == 401:
 #         return redirect(url_for("login"))
 
+@admin.route('/')
+@login_required
+def admins():
+    news = News.query.order_by(News.date.desc()).all()
+    feedbacks = Feedback.query.order_by(Feedback.date.desc()).all()
+    return render_template("authorization/admin.html", news=news, feedbacks=feedbacks)
+
+
+@admin.route('/create', methods=['POST', 'GET'])
+@login_required
+def create():
+    if request.method == 'POST':
+        news_simple = News(title=request.form["title"], content=request.form["content"])
+        # title = request.form['title']
+        # content = request.form['content']
+        try:
+            db.session.add(news_simple)
+            db.session.commit()
+            return redirect("/")
+        except:
+            return "Ошибка"
+    else:
+        return render_template("authorization/create.html")
+
 
 @admin.route('/<slug>/news_update')
 @login_required
@@ -76,26 +100,7 @@ def news_delete(slug):
         return "Ошибка"
 
 
-@admin.route('/create', methods=['POST', 'GET'])
-@login_required
-def create():
-    if request.method == 'POST':
-        news_simple = News(title=request.form["title"], content=request.form["content"])
-        # title = request.form['title']
-        # content = request.form['content']
-        try:
-            db.session.add(news_simple)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "Ошибка"
-    else:
-        return render_template("authorization/create.html")
 
 
-@admin.route('/')
-@login_required
-def admins():
-    news = News.query.order_by(News.date.desc()).all()
-    feedbacks = Feedback.query.order_by(Feedback.date.desc()).all()
-    return render_template("authorization/admin.html", news=news, feedbacks=feedbacks)
+
+
