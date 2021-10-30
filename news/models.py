@@ -17,7 +17,7 @@ class News(db.Model):
     content = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(140), nullable=True, default="default.jpg")
     date = db.Column(db.DateTime, default=datetime.utcnow)
-    comments = db.relationship('Комментарии', backref='comments', lazy='dynamic')
+    comments = db.relationship('Comments', backref='news', lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
         super(News, self).__init__(*args, **kwargs)

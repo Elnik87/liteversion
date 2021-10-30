@@ -10,19 +10,23 @@
     <h5>{{ news_detail.title }}</h5>
     <h5>{{ news_detail.content }}</h5>
     <h5>{{ news_detail.date.date() }}</h5>
+    <img src="{{url_for ('static', filename = 'newspicture/') }}{{ news_detail.image }}">
 </div>
     {% for comment in comments %}
     <div>
     <h5> {{comment.name}} </h5>
     <h5> {{comment.content}} </h5>
     <h5> {{comment.date.date()}} </h5>
+
     </div>
     {% endfor %}
 
 <div>
+    <form method="post">
     <h5>{{ form.name }}</h5>
     <h5> {{ form.content }}</h5>
     <h5>{{ form.submit }}</h5>
+    </form>
 </div>
 </main>
 

@@ -93,14 +93,15 @@ def news_update_create(slug):
 @login_required
 def new_news():
     form = NewsForm()
-    if form.validate_on_submit():
-        news = News(title=form.title.data, content=form.content.data, news_image=form.picture.data, author=current_user)              # внимательнее на переменную
+    if request.method == "POST":
+        news = News(title=form.title.data, content=form.content.data)    # внимательнее на переменную
+        print(form.picture.data.filename)
         picture_file = save_picture_news(form.picture.data)
         news.image = picture_file
         db.session.add(news)
         db.session.commit()
         flash("Новость опубликована")
-        return redirect(url_for("/"))
+        return redirect("/")
     return render_template("authorization/new_news.html", form=form, legend="Новая новость")
 
 

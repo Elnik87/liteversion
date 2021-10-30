@@ -8,7 +8,7 @@ class NewsForm(FlaskForm):
     title = StringField("Заголовок", validators=[DataRequired()])
     content = TextField("Содержание новости", validators=[DataRequired()])
     picture = FileField("Изображение в jpg или png", validators=[FileAllowed("jpg", "png")])
-    submit = SubmitField("Опубликовать")
+    #submit = SubmitField("Опубликовать")
 
 
 class NewsUpdateForm(FlaskForm):

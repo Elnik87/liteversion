@@ -6,18 +6,13 @@
 <main>
     <div class="login-form">
         <div class="container">
-            <form action="" name="form_sign_in" enctype="multipart/form-data" id="new_news" method="post">
-
+            <form action="" name="form_sign_in" enctype="multipart/form-data" id="newnews" method="post">
 
                 <legend class="legend">{{legend}}</legend>
-
-
-
                 {{ form.title  }}
                 {{ form.content }}
                 {{ form.picture }}
-
-                {{ form.submit }}
+                <button type="submit">Опубликовать</button>
             </form>
         </div>
     </div>

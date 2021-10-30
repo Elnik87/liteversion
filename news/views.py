@@ -15,17 +15,19 @@ def newses():
     return render_template("news/news.html", news=news)
 
 
-@news.route("/<slug>")
+@news.route("/<slug>", methods=["POST", "GET"])
 def news_detail(slug):
     news_detail = News.query.filter(News.slug == slug).first()
     comments = Comments.query.filter(News.slug == slug).all()
     form = CommentForm()
-    if form.validate_on_submit():
-        comment = CommentForm(name=form.name.data, content=form.content.data, author=current_user)  # внимательнее на переменную
+    if request.method == "POST":
+        print("dfhdfhd")
+
+        comment = Comments(name=form.name.data, content=form.content.data, news_id=news_detail.id)  # внимательнее на переменную
         db.session.add(comment)
         db.session.commit()
         flash("Комментарий опубликован")
-        return redirect(url_for("/"))
+        return redirect("/")
     return render_template("news/news_detail.html", news_detail=news_detail, form=form, comments=comments)
 
 
