@@ -36,3 +36,4 @@ class Comments(db.Model):
     content = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
     news_id = db.Column(db.Integer, db.ForeignKey('news.id'), nullable=False)
+
