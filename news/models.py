@@ -15,8 +15,9 @@ class News(db.Model):
     title = db.Column(db.String(30), nullable=False)
     slug = db.Column(db.String(140), unique=True)
     content = db.Column(db.Text, nullable=False)
-    # image = хочу добавить картинку, может видео итд, нашел в ютубе всякие руководства, но там хрен поймешь
+    image = db.Column(db.String(140), nullable=True, default="default.jpg")
     date = db.Column(db.DateTime, default=datetime.utcnow)
+    comments = db.relationship('Комментарии', backref='comments', lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
         super(News, self).__init__(*args, **kwargs)
@@ -28,3 +29,10 @@ class News(db.Model):
 
     def __repr__(self):
         return "<News id: {}, title: {}".format(self.id, self.title)
+
+class Comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    news_id = db.Column(db.Integer, db.ForeignKey('news.id'), nullable=False)

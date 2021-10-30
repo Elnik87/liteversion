@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main>
+    <div class="login-form">
+        <div class="container">
+            <form action="" name="form_sign_in" enctype="multipart/form-data" id="new_news" method="post">
+
+
+                <legend class="legend">{{legend}}</legend>
+
+
+
+                {{ form.title  }}
+                {{ form.content }}
+                {{ form.picture }}
+
+                {{ form.submit }}
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+</main>
+
+{% endblock %}

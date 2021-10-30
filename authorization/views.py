@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from liteversion import bcrypt
 from werkzeug.utils import redirect
 
@@ -7,6 +7,8 @@ from feedback.models import Feedback
 from news.models import News
 from liteversion import db
 from .models import User
+from news.forms import NewsForm
+from news.utils import save_picture_news
 
 admin = Blueprint("admin", __name__, template_folder="templates")
 
@@ -87,6 +89,23 @@ def news_update_create(slug):
         news = News.query.get(slug)
         return render_template("authorization/news_update_create.html", news=news)
 
+@admin.route("/newnews", methods=['POST', 'GET'])
+@login_required
+def new_news():
+    form = NewsForm()
+    if form.validate_on_submit():
+        news = News(title=form.title.data, content=form.content.data, news_image=form.picture.data, author=current_user)              # внимательнее на переменную
+        picture_file = save_picture_news(form.picture.data)
+        news.image = picture_file
+        db.session.add(news)
+        db.session.commit()
+        flash("Новость опубликована")
+        return redirect(url_for("/"))
+    return render_template("authorization/new_news.html", form=form, legend="Новая новость")
+
+
+
+
 
 @admin.route('/<slug>/news_delete')
 @login_required
@@ -98,6 +117,8 @@ def news_delete(slug):
         return redirect('/')
     except:
         return "Ошибка"
+
+
 
 
 
