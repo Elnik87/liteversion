@@ -66,31 +66,34 @@ def news_update(slug):
     return render_template("authorization/news_update.html", news=news)
 
 
-@admin.route('/<slug>/news_update_create')
+@admin.route('/<slug>/news_update_create', methods=["GET", "POST"])
 @login_required
 def news_update_create(slug):
-    form = NewsUpdateForm()
+    news = News.query.filter_by(slug=slug).first_or_404()
+    form = NewsUpdateForm(obj=news)
     if request.method == "POST":
-        news = News(title=form.title.data, intro=form.intro.data, content=form.content.data)  # внимательнее на переменную
+        news.title = form.title.data
+        news.intro = form.intro.data
+        news.content = form.content.data
         picture_file = save_picture_news(form.picture.data)
         news.image = picture_file
         db.session.add(news)
         db.session.commit()
         flash("Новость обновлена")
         return redirect("/")
-    return render_template("authorization/news_update_create.html", form=form, legend="Новая новость")
+    return render_template("authorization/news_update_create.html", news=news, form=form, legend="Новая новость")
 
 
 @admin.route('/<slug>/news_delete')
 @login_required
-def news_delete(news):
-    news = News.query.get_or_404(news.slug)
+def news_delete(slug):
+    news = News.query.filter_by(slug=slug).first()
     try:
         db.session.delete(news)
         db.session.commit()
         return redirect('/')
-    except:
-        return "Ошибка"
+    except Exception as e:
+        return f"Ошибка {e}"
 
 
 

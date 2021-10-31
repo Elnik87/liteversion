@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, url_for
 from werkzeug.utils import redirect
 from liteversion import db
 from .models import Feedback
@@ -16,7 +16,7 @@ def feedback_add():
         try:
             db.session.add(feedback)
             db.session.commit()
-            return redirect('/')
+            return redirect(url_for("feedback.feedback_add"))
         except:
             return flash("Сообщение успешно неотправлено")
 

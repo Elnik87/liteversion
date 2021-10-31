@@ -14,11 +14,11 @@ class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
     slug = db.Column(db.String(140), unique=True)
-
+    intro = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(140), nullable=True, default="default.jpg")
     date = db.Column(db.DateTime, default=datetime.utcnow)
-    comments = db.relationship('Comments', backref='news', lazy='dynamic')
+    comments = db.relationship('Comments', cascade="all,delete", backref='news', lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
         super(News, self).__init__(*args, **kwargs)
@@ -38,3 +38,9 @@ class Comments(db.Model):
     date = db.Column(db.DateTime, default=datetime.utcnow)
     news_id = db.Column(db.Integer, db.ForeignKey('news.id'), nullable=False)
 
+    def __init__(self, *args, **kwargs):
+        super(Comments, self).__init__(*args, **kwargs)
+
+
+    def __repr__(self):
+        return "<Comments id: {}, name: {}".format(self.id, self.name)

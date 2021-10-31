@@ -10,7 +10,12 @@
 {% for new in news %}
 <div class="alert alert-light">
     <a href="/news/{{ new.slug }}">{{ new.title }}</a>
-<h5>{{ new.content }}</h5>
+    <div id="app">
+
+<h5>{{ new.intro }}</h5>
+        <button class="btn primary" v-on:click="allNews">Развернуть полностью</button>
+        <p class="items-text" data-toggle="collapse" id="optional`${post.id}`">[[post.text]]</p>
+    </div>
 <h5>{{ new.date.date() }}</h5>
 </div>
 

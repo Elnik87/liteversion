@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, Form
 from flask_wtf.file import FileAllowed
 from wtforms import StringField, FileField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
@@ -18,6 +18,9 @@ class NewsUpdateForm(FlaskForm):
     content = TextAreaField("Содержание новости", validators=[DataRequired()])
     picture = FileField("Изображение в jpg или png", validators=[FileAllowed("jpg", "png")])
     submit = SubmitField("Обновить новость")
+
+    def populate_obj(obj):
+        super().populate_obj()
 
 
 class CommentForm(FlaskForm):

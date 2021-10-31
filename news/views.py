@@ -18,7 +18,7 @@ def newses():
 @news.route("/<slug>", methods=["POST", "GET"])
 def news_detail(slug):
     news_detail = News.query.filter(News.slug == slug).first()
-    comments = Comments.query.filter(News.slug == slug).all()
+    comments = news_detail.comments.all()
     form = CommentForm()
     if request.method == "POST":
         comment = Comments(name=form.name.data, content=form.content.data, news_id=news_detail.id)  # внимательнее на переменную

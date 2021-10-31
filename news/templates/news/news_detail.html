@@ -14,6 +14,15 @@
 </div>
     <h5>{{ news_detail.date.date() }}</h5>
 </div>
+    <div class="container pt-3" id="app">
+        <div class="card center">
+            <p>Количество лайков:  ${ like }$ Количество дизлайков:  ${ dislike }$  </p>
+        </div>
+        <div>
+        <button class="btn primary" v-on:click="addLike">Лайк</button>
+        <button class="btn danger" v-on:click="addDisLike">ДизЛайк</button>
+        </div>
+    </div>
 
     {% for comment in comments %}
     <div class="container alert alert-light">

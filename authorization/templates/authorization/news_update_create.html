@@ -9,16 +9,16 @@
         <div class="container">
             <form action="" name="form_sign_in" enctype="multipart/form-data" id="newnews" method="post">
 
-                <input name="title" id="title" value="{{ form.title  }}">
+                {{ form.title  }}
                 <div>
-                <textarea name="content" id="content">{{ form.intro }}</textarea>
+               {{ form.intro }}
                 </div>
                 <div>
-                <textarea name="content" id="content">{{ form.content }}</textarea>
+                {{ form.content }}
                 </div>
                 <div>
                 {{ form.picture }}
-                    </div>
+                </div>
                 {{ form.submit }}
             </form>
         </div>
