@@ -7,7 +7,7 @@ from feedback.models import Feedback
 from news.models import News
 from liteversion import db
 from .models import User
-from news.forms import NewsForm
+from news.forms import NewsForm, NewsUpdateForm
 from news.utils import save_picture_news
 
 admin = Blueprint("admin", __name__, template_folder="templates")
@@ -24,7 +24,7 @@ def login():
                 login_user(user)
                 return redirect(url_for("admin.admins"))
             else:
-                return redirect(url_for("login"))
+                return redirect(url_for("admin.login"))
     else:
         return render_template("authorization/login.html")
 
@@ -35,11 +35,6 @@ def logout():
     logout_user()
     return redirect(url_for("/"))
 
-#
-# @admin.after_request
-# def redirect_to_authorization(response):
-#     if response.status_code == 401:
-#         return redirect(url_for("login"))
 
 @admin.route('/')
 @login_required
@@ -52,18 +47,16 @@ def admins():
 @admin.route('/create', methods=['POST', 'GET'])
 @login_required
 def create():
-    if request.method == 'POST':
-        news_simple = News(title=request.form["title"], content=request.form["content"])
-        # title = request.form['title']
-        # content = request.form['content']
-        try:
-            db.session.add(news_simple)
-            db.session.commit()
-            return redirect("/")
-        except:
-            return "Ошибка"
-    else:
-        return render_template("authorization/create.html")
+    form = NewsForm()
+    if request.method == "POST":
+        news = News(title=form.title.data, intro=form.intro.data, content=form.content.data)  # внимательнее на переменную
+        picture_file = save_picture_news(form.picture.data)
+        news.image = picture_file
+        db.session.add(news)
+        db.session.commit()
+        flash("Новость опубликована")
+        return redirect(url_for("admin.admins"))
+    return render_template("authorization/create.html", form=form, legend="Новая новость")
 
 
 @admin.route('/<slug>/news_update')
@@ -76,42 +69,22 @@ def news_update(slug):
 @admin.route('/<slug>/news_update_create')
 @login_required
 def news_update_create(slug):
-    news = News.query.get(slug)
-    if request.method == 'POST':
-        news.title = request.form["title"]
-        news.content = request.form["content"]
-        try:
-            db.session.commit()
-            return redirect('')
-        except:
-            return "Ошибка"
-    else:
-        news = News.query.get(slug)
-        return render_template("authorization/news_update_create.html", news=news)
-
-@admin.route("/newnews", methods=['POST', 'GET'])
-@login_required
-def new_news():
-    form = NewsForm()
+    form = NewsUpdateForm()
     if request.method == "POST":
-        news = News(title=form.title.data, content=form.content.data)    # внимательнее на переменную
-        print(form.picture.data.filename)
+        news = News(title=form.title.data, intro=form.intro.data, content=form.content.data)  # внимательнее на переменную
         picture_file = save_picture_news(form.picture.data)
         news.image = picture_file
         db.session.add(news)
         db.session.commit()
-        flash("Новость опубликована")
+        flash("Новость обновлена")
         return redirect("/")
-    return render_template("authorization/new_news.html", form=form, legend="Новая новость")
-
-
-
+    return render_template("authorization/news_update_create.html", form=form, legend="Новая новость")
 
 
 @admin.route('/<slug>/news_delete')
 @login_required
-def news_delete(slug):
-    news = News.query.get_or_404(slug)
+def news_delete(news):
+    news = News.query.get_or_404(news.slug)
     try:
         db.session.delete(news)
         db.session.commit()

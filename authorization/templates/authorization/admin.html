@@ -4,16 +4,20 @@
 {% block content %}
 
 <main>
-     <a href="{{ url_for('admin.create') }}" class="btn btn-warning">Добавить новость</a>
+
 {% if news|length > 0 %}
+     <div class="text-center">
 <h1>Новости воинской части</h1>
+     </div>
+
 
 {% for new in news %}
-<div class="alert alert-info">
-<h5>{{ new.title }}</h5>
-<h5>{{ new.content }}</h5>
-<h5>{{ new.slug }}</h5>
-<h5>{{ new.date.date() }}</h5>
+<div class="alert alert-light">
+<h5 class="text-center"> {{ new.title }}</h5>
+<h5>Текст: </h5>
+     <h6>{{ new.intro }}</h6>
+<!-- <h5>{{ new.slug }}</h5> -->
+<h5>Дата добавления: {{ new.date.date() }}</h5>
 
      <a href="/admin/{{new.slug}}/news_update" class="btn btn-warning">Редактировать</a>
 </div>
@@ -21,25 +25,27 @@
 
 {% endfor%}
 {% else %}
-<h2>Пока еще ни одну новость не добавили</h2>
+<h2 class="text-center">Пока еще ни одну новость не добавили</h2>
 
 {% endif %}
+     <a href="{{ url_for('admin.create') }}" class="btn btn-warning">Добавить новость</a>
 <br>
 
-     {% if feedback|length > 0 %}
-<h1>Кто что написал в обратной связи</h1>
+     {% if feedbacks|length > 0 %}
+<h1 class="text-center">Кто что написал в обратной связи</h1>
 
 {% for feedback in feedbacks %}
-<div class="alert alert-info">
-<h5>{{ feedback.name }}</h5>
-<h5>{{ feedback.last_name }}</h5>
-<h5>{{ feedback.body }}</h5>
-<h5>{{ new.date.date() }}</h5>
+<div class="alert alert-secondary">
+<h5>Имя: {{ feedback.name }}</h5>
+<h5>Фамилия: {{ feedback.last_name }}</h5>
+<h5>Текст сообщения:</h5>
+     <h6> {{ feedback.body }}</h6>
+<h5>Дата: {{ feedback.date.date() }}</h5>
 </div>
 
 {% endfor%}
 {% else %}
-<h2>Пока еще никто ничего не написал</h2>
+<h2 class="text-center">Пока еще никто ничего не написал</h2>
 
 {% endif %}
 </main>

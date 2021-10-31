@@ -6,25 +6,28 @@
 <main>
 
 
-<div>
-    <h5>{{ news_detail.title }}</h5>
+<div class="container">
+    <h5 class="text-center">{{ news_detail.title }}</h5>
     <h5>{{ news_detail.content }}</h5>
-    <h5>{{ news_detail.date.date() }}</h5>
-    <img src="{{url_for ('static', filename = 'newspicture/') }}{{ news_detail.image }}">
+<div class="container" style="width: 100%">
+    <img class="text-center" src="{{url_for ('static', filename = 'newspicture/') }}{{ news_detail.image }}">
 </div>
+    <h5>{{ news_detail.date.date() }}</h5>
+</div>
+
     {% for comment in comments %}
-    <div>
-    <h5> {{comment.name}} </h5>
+    <div class="container alert alert-light">
+    <h5 class="text-center"> {{comment.name}} </h5>
     <h5> {{comment.content}} </h5>
     <h5> {{comment.date.date()}} </h5>
 
     </div>
     {% endfor %}
 
-<div>
-    <form method="post">
+<div class="container">
+    <form class="container" method="post">
     <h5>{{ form.name }}</h5>
-    <h5> {{ form.content }}</h5>
+     <h5>{{ form.content }}</h5>
     <h5>{{ form.submit }}</h5>
     </form>
 </div>

@@ -14,6 +14,7 @@ class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
     slug = db.Column(db.String(140), unique=True)
+
     content = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(140), nullable=True, default="default.jpg")
     date = db.Column(db.DateTime, default=datetime.utcnow)

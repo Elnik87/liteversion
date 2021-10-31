@@ -5,10 +5,10 @@
 
 <main>
 {% if news|length > 0 %}
-<h1>Новости воинской части</h1>
+<h1 class="text-center">Новости воинской части</h1>
 
 {% for new in news %}
-<div class="alert alert-info">
+<div class="alert alert-light">
     <a href="/news/{{ new.slug }}">{{ new.title }}</a>
 <h5>{{ new.content }}</h5>
 <h5>{{ new.date.date() }}</h5>
@@ -17,7 +17,7 @@
 
 {% endfor%}
 {% else %}
-<h2>Пока еще ни одну новость не добавили</h2>
+<h2 class="text-center">Пока еще ни одну новость не добавили</h2>
 {% endif %}
 
 </main>

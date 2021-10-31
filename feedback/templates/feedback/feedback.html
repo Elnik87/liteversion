@@ -3,30 +3,41 @@
 {% block content %}
 
 <main>
+    <p>Напишите, что-то интересующее Вас и командование воинской части через определенное
+        время это обязательно увидит. Может есть какое-то предложение или желаете устроиться на
+        военную службу по контракту, может вы ранее проходили службу в воинской части и хотите обратиться
+        к командованию по личным вопросам.</p>
+
     <div class="content-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-sm-6">
-                    <h3 class="widget-title">Форма обратной связи</h3>
-                    <div class="contact-form">
-                        <form name="feedback" id="feedback" method="post">
-                            <p>
-                                <input name="name" type="text" id="name" value="{{ name }}">
-                            </p>
-                            <p>
-                                <input name="last_name" type="text" id="last_name" value="{{ last_name }}">
-                            </p>
-                            <p>
-                                <textarea name="body" id="body">{{ body }}</textarea>
-                            </p>
-                            <input type="submit" class="mainBtn" value="Отправить">
-                        </form>
-                    </div>
+                <div class="col-md-12 col-sm-12" >
+                    {% for msg in get_flashed_messages() %}
+                    <div class=flash>{{ msg }}</div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </div>
+                    <form class="row g-3" method="post">
+                        <div class="col-md-6">
+                            <label class="form-label">Имя</label>
+                            <input type="text" name="name" class="form-control" value="{{ name }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Фамилия</label>
+                            <input type="text" name="last_name" class="form-control" value="{{ last_name }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Содержание сообщения</label>
+                            <textarea class="col-12" name="body" id="body">{{ body }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Отправить сообщение</button>
+                        </div>
+                    </form>
 
 </main>
 
 {% endblock %}
+
+

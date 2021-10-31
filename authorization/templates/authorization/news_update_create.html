@@ -4,25 +4,23 @@
 {% block content %}
 
 <main>
-    <div class="content-section">
+
+    <div class="login-form">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <h3 class="widget-title" style="text-align: center">Обновление новости</h3>
-                    <div class="contact-form">
-                        <form action="" name="news_update_create" id="news_update_create"
-                              method="post">
-                            <p>
-                                <input name="title" type="text" id="title" value='{{ news.title }}'>
-                            </p>
-                            <p>
-                                <textarea name="content" id="content">{{ news.content }}</textarea>
-                            </p>
-                            <input type="submit" class="mainBtn" value="Обновить">
-                        </form>
-                    </div>
+            <form action="" name="form_sign_in" enctype="multipart/form-data" id="newnews" method="post">
+
+                <input name="title" id="title" value="{{ form.title  }}">
+                <div>
+                <textarea name="content" id="content">{{ form.intro }}</textarea>
                 </div>
-            </div>
+                <div>
+                <textarea name="content" id="content">{{ form.content }}</textarea>
+                </div>
+                <div>
+                {{ form.picture }}
+                    </div>
+                {{ form.submit }}
+            </form>
         </div>
     </div>
 

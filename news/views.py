@@ -21,8 +21,6 @@ def news_detail(slug):
     comments = Comments.query.filter(News.slug == slug).all()
     form = CommentForm()
     if request.method == "POST":
-        print("dfhdfhd")
-
         comment = Comments(name=form.name.data, content=form.content.data, news_id=news_detail.id)  # внимательнее на переменную
         db.session.add(comment)
         db.session.commit()

@@ -4,36 +4,20 @@
 {% block content %}
 
 <main>
-    <div class="content-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <h3 class="widget-title" style="text-align: center">Войти как администратор</h3>
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                    <ul class=flashes>
-                        {% for message in messages %}
-                        <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    {% endwith %}
-                    <div class="contact-form">
-                        <form action="" name="login" id="form" method="post">
-                            <p>
-                                <input name="login" type="text" id="login"
-                                       placeholder="Введите имя администратора новостей">
-                            </p>
-                            <p>
-                                <input name="password" type="text" id="password" placeholder="Введите пароль">
-                            </p>
-                            <input type="submit" class="mainBtn" value="Отправить">
-                        </form>
-                    </div> <!-- /.contact-form -->
-                </div>
-            </div>
+    <form class="container" action="" name="login" id="form" method="post">
+  <div class="mb-3">
+    <label for="login" class="form-label">введите логин</label>
+    <input type="text" class="form-control" name="login" id="login"  placeholder="Введите имя администратора новостей">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль</label>
+    <input type="password" class="form-control" name="password" id="password" placeholder="Введите пароль">
+  </div>
+        <div class="text-center">
+  <button type="submit" class="btn btn-success position-relative">Войти как администратор</button>
         </div>
-    </div> <!-- /.content-section -->
+</form>
+
 
 </main>
 
